@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd"> 
+<mapper namespace="com.example.demo.database.Borrowbase"   >
+<update id="jiebook1" parameterType="String">
+UPDATE book SET number=number-1 WHERE bookname=#{jiebookname};
+</update>
+<update id="huanbook1" parameterType="String">
+UPDATE book SET number=number+1 WHERE bookname=#{jiebookname};
+</update>
+
+<insert id="jiebook2" parameterType="com.example.demo.Bean.Borrow" >
+ insert into borrow values(#{jiebookname},#{peopleid});
+</insert>
+<delete id="huanbook2" parameterType="com.example.demo.Bean.Borrow" >
+DELETE top (1) FROM borrow WHERE jiebookname = #{jiebookname} and peopleid=#{peopleid};
+</delete>
+<select id="showborrow"  resultType="com.example.demo.Bean.Borrow" >
+  select * from borrow order by peopleid;
+</select>
+
+</mapper>

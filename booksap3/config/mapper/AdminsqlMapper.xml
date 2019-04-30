@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd"> 
+<mapper namespace="com.example.demo.database.Adminbase" >
+<insert id="insertadmin" parameterType="com.example.demo.Bean.Admin" >
+insert into admin values(#{id}#{password},#{auth})
+</insert>
+<delete id="deladmin" parameterType="String" >
+delete from admin where id=#{id}
+</delete>
+	
+
+<update id="moadmin"  parameterType="com.example.demo.Bean.Admin" >
+ UPDATE admin SET password=#{password} ,auth=#{auth} WHERE id=#{id}
+
+</update>
+<select id="showalladmin" resultType="com.example.demo.Bean.Admin" >
+select * from admin;
+</select>
+<select id="showadminbypage" resultType="com.example.demo.Bean.Admin"  parameterType="int"  >
+select top (#{page}*10) * from admin except select top (#{page}*10-10) * from admin
+</select>
+<select id="adselpage" resultType="int" >
+select count(*) from admin;
+</select>
+
+<select id="seladmin"  parameterType="String"   resultType="com.example.demo.Bean.Admin" >
+select * from admin where id=#{id};
+</select>
+
+
+</mapper>

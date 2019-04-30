@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd"> 
+<mapper namespace="com.example.demo.database.Bookbase" >
+<insert id="insertbook" parameterType="com.example.demo.Bean.Book" >
+insert into book values(#{id},#{bookname},#{number},#{describe},#{price});
+</insert>
+<delete id=" delbook" parameterType="String" >
+delete from admin where id=#{id};
+</delete>
+	
+
+<update id="moabook"  parameterType="com.example.demo.Bean.Book" >
+UPDATE admin SET password=#{password} ,auth=#{auth}  WHERE id=#{id};
+
+</update>
+<select id="showallbook" resultType="com.example.demo.Bean.Book" >
+select * from book;
+</select>
+<select id="showbookbypage" resultType="com.example.demo.Bean.Book"  parameterType="int"  >
+select top (#{page}*10) * from book except select top (#{page}*10-10) * from book
+</select>
+<select id="selpage" resultType="int" >
+select count(*) from book;
+</select>
+
+<select id="selbookbyname"  parameterType="String"   resultType="com.example.demo.Bean.Book" >
+select * from book where bookname like   '%'+#{text}+'%';
+</select>
+
+<select id="selbookbyCat"  parameterType="String"   resultType="com.example.demo.Bean.Book" >
+select * from book where describe like '%'+#{text}+'%';
+</select>
+
+
+</mapper>
